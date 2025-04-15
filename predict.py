@@ -1,26 +1,19 @@
-import uvicorn
-import pickle
-import pandas as pd
-from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import pickle
-import pandas as pd
 from pydantic import BaseModel
-
+import pandas as pd
+import pickle
 
 # Load model
 with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
-# FastAPI app
 app = FastAPI()
 
-# 👇 CORS setup
+# ✅ Add this to allow Vercel frontend to access FastAPI backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # <-- or specify your domain: ["https://frontend-cxl9cmbj4.vercel.app"]
+    allow_origins=["https://frontend-cxl9cmbj4.vercel.app"],  # or replace * with ["https://frontend-cxl9cmbj4.vercel.app"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,11 +30,6 @@ class InsuranceInput(BaseModel):
 
 @app.post("/predict")
 def predict(data: InsuranceInput):
-    # Convert input to DataFrame
     input_df = pd.DataFrame([data.dict()])
-    
-    # Predict
     prediction = model.predict(input_df)[0]
     return {"predicted_charge": round(prediction, 2)}
-
-# Run with: uvicorn predict:app --reload

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Insurance Charges Predictor</title>
+</head>
+<body>
+  <h2>Insurance Charges Predictor</h2>
+  <form id="predict-form">
+    <label>Age: <input type="number" name="age" required></label><br><br>
+    <label>Sex:
+      <select name="sex">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </label><br><br>
+    <label>BMI: <input type="number" step="any" name="bmi" required></label><br><br>
+    <label>Children: <input type="number" name="children" required></label><br><br>
+    <label>Smoker:
+      <select name="smoker">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </label><br><br>
+    <label>Region:
+      <select name="region">
+        <option value="northeast">Northeast</option>
+        <option value="northwest">Northwest</option>
+        <option value="southeast">Southeast</option>
+        <option value="southwest">Southwest</option>
+      </select>
+    </label><br><br>
+    <button type="submit">Predict</button>
+  </form>
+
+  <h3 id="result"></h3>
+
+  <script>
+    const form = document.getElementById('predict-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const jsonData = Object.fromEntries(formData.entries());
+
+      const response = await fetch('https://your-app-name.onrender.com/predict', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(jsonData)
+      });
+
+      const result = await response.json();
+      document.getElementById('result').textContent = `Predicted charge: ₹${result.predicted_charge}`;
+    });
+  </script>
+</body>
+</html>

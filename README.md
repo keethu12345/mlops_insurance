@@ -24,3 +24,29 @@ Access the API at: [https://insurance-api-mq3g.onrender.com/docs](https://insura
 
 ## 📦 Project Structure
 
+mlops-insurance/ ├── insurance.csv ├── model.pkl ├── train.py # Trains the model ├── predict.py # FastAPI app for predictions ├── Dockerfile # For containerization └── frontend/ └── index.html # Optional simple frontend
+
+
+## 🧪 API Usage
+
+Send a POST request to `/predict` with the following JSON:
+
+json
+{
+  "age": 35,
+  "sex": "male",
+  "bmi": 28.5,
+  "children": 2,
+  "smoker": "yes",
+  "region": "southeast"
+}
+{
+  "predicted_charge": 32045.67
+}
+
+## 🐳 Docker Instructions
+docker build -t insurance-api .
+docker run -d -p 8000:8000 insurance-api
+
+## ✨ Author
+Built by keethu12345

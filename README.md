@@ -6,7 +6,7 @@ This project is a full-stack MLOps application that predicts medical insurance c
 
 ## 🚀 Live Demo
 
-Access the API at: [https://insurance-api-mq3g.onrender.com](https://insurance-api-mq3g.onrender.com)
+Access the API at: [https://insurance-api-mq3g.onrender.com/docs](https://insurance-api-mq3g.onrender.com'docs)
 
 ## 📊 Model Overview
 

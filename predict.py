@@ -13,7 +13,7 @@ app = FastAPI()
 # ✅ Add this to allow Vercel frontend to access FastAPI backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://frontend-cxl9cmbj4.vercel.app"],  # or replace * with ["https://frontend-cxl9cmbj4.vercel.app"]
+    allow_origins=["*"],  # or replace * with ["https://frontend-cxl9cmbj4.vercel.app"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
